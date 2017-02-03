@@ -44,7 +44,7 @@ public class App {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-    @FeignClient("myspringcloud")
+    @FeignClient("myspring")
     public interface SampleClient {
 
         @RequestMapping(value = "/", method = RequestMethod.GET)
