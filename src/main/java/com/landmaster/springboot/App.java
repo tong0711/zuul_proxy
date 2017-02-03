@@ -39,11 +39,11 @@ public class App {
     public SimpleFilter simpleFilter() {
         return new SimpleFilter();
     }
-//    @Bean
-//    @LoadBalanced
-//    public RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
     @FeignClient("myspring")
     public interface SampleClient {
 
