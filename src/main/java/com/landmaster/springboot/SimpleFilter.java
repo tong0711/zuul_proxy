@@ -17,8 +17,8 @@ public class SimpleFilter extends ZuulFilter {
      *  RequestContext ctx = RequestContext.getCurrentContext();
      ctx.addZuulRequestHeader("Test", "TestSample");
      */
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 //    @Autowired
 //    private App.SampleClient sampleClient;
     private static Logger log = LoggerFactory.getLogger(SimpleFilter.class);
