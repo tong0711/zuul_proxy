@@ -19,8 +19,8 @@ public class SimpleFilter extends ZuulFilter {
      */
 //    @Autowired
 //    private RestTemplate restTemplate;
-//    @Autowired
-//    private App.SampleClient sampleClient;
+    @Autowired
+    private App.SampleClient sampleClient;
     private static Logger log = LoggerFactory.getLogger(SimpleFilter.class);
 
     @Override
@@ -45,7 +45,7 @@ public class SimpleFilter extends ZuulFilter {
         ctx.addZuulRequestHeader("user","test_user");
         log.info("=========================== test feign");
 
-       // log.info("==========================="+sampleClient.choose());
+        log.info("==========================="+sampleClient.choose());
         //this location can  exec auth and add user info to header
         if(request.getRequestURL().toString().contains("ttt")){
             setFailedRequest("un auth", 401);

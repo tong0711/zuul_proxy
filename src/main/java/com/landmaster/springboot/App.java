@@ -44,11 +44,11 @@ public class App {
 //    public RestTemplate restTemplate() {
 //        return new RestTemplate();
 //    }
-//    @FeignClient("myspring")
-//    public interface SampleClient {
-//
-//        @RequestMapping(value = "/", method = RequestMethod.GET)
-//        String choose();
-//    }
+    @FeignClient("myspring")
+    public interface SampleClient {
+
+        @RequestMapping(value = "/", method = RequestMethod.GET)
+        String choose();
+    }
 
 }
