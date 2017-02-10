@@ -1,6 +1,8 @@
 package com.landmaster.springboot;
 
 import com.netflix.config.*;
+import feign.Param;
+import feign.RequestLine;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,8 +15,11 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 //@Controller
 @EnableZuulProxy
@@ -29,10 +34,6 @@ import org.springframework.web.client.RestTemplate;
 public class App {
 
     public static void main(String[] args) throws Exception {
-//        PolledConfigurationSource source = new ConsulConfigurationSource("");
-//        AbstractPollingScheduler scheduler = new FixedDelayPollingScheduler();
-//        DynamicConfiguration configuration = new DynamicConfiguration(source, scheduler);
-//        ConfigurationManager.install(configuration);
         SpringApplication.run(App.class, args);
     }
    @Bean
@@ -44,11 +45,17 @@ public class App {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-    @FeignClient("myspring")
+    @FeignClient(name="publicapp")
     public interface SampleClient {
-
-        @RequestMapping(value = "/", method = RequestMethod.GET)
-        String choose();
+        //@RequestLine("POST /auth/token/isPermitted?access_token={access_token}&resource={resource}")
+        @RequestMapping(value = "/auth/token/isPermitted", method = RequestMethod.POST)
+        Map isPermitted(@RequestParam("access_token") String access_token, @RequestParam("resource")  String resource);
+    }
+    @FeignClient(name="myspring")
+    public interface MysrpingClient {
+        //@RequestLine("POST /auth/token/isPermitted?access_token={access_token}&resource={resource}")
+        @RequestMapping(value = "/ttt", method = RequestMethod.GET ,consumes = "application/json")
+        String ttt(@RequestParam("access_token") String access_token, @RequestParam("resource")  String resource);
     }
 
 }
